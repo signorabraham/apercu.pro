@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aperçu | Structured Understanding of Africa's Private Technology Markets</title>
+  <meta name="description" content="Research and advisory firm helping technology companies and investors navigate Africa's private markets.">
+  <meta property="og:title" content="Aperçu | Africa's Private Technology Markets">
+  <meta property="og:description" content="Research that informs capital decisions. Advisory that builds companies worth backing.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://apercu.pro">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: #FAFAF8;
+      color: #1A1A1A;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    .apercu-container {
+      min-height: 100vh;
+      background: #FAFAF8;
+    }
+    
+    ::selection {
+      background: #1A1A1A;
+      color: #FAFAF8;
+    }
+    
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-up {
+      animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      opacity: 0;
+    }
+    
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0 48px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav.scrolled {
+      background: rgba(250,250,248,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #E8E8E6;
+    }
+    
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      text-decoration: none;
+    }
+    
+    .logo-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: #1A1A1A;
+      letter-spacing: -0.02em;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 40px;
+    }
+    
+    .nav-link {
+      position: relative;
+      color: #1A1A1A;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding: 8px 0;
+      transition: color 0.2s ease;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #1A1A1A;
+      transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: #FAFAF8;
+      border-bottom: 1px solid #E8E8E6;
+      padding: 24px 48px;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 99;
+    }
+    
+    .mobile-menu.open {
+      display: flex;
+    }
+    
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 48px 80px;
+      overflow: hidden;
+    }
+    
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 55%;
+      height: 100%;
+      background-image: url('./images/hero-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, #FAFAF8 0%, rgba(250,250,248,0) 50%);
+    }
+    
+    .hero-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 32px;
+    }
+    
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #1A1A1A;
+    }
+    
+    .hero-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(42px, 7vw, 76px);
+      font-weight: 400;
+      line-height: 1.1;
+      color: #1A1A1A;
+      margin-bottom: 32px;
+      letter-spacing: -0.02em;
+    }
+    
+    .hero-subtitle {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #555;
+      max-width: 640px;
+      margin-bottom: 48px;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+    }
+    
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #1A1A1A;
+      color: #FAFAF8;
+      padding: 16px 32px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: none;
+    }
+    
+    .cta-button:hover {
+      background: #333;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    
+    .cta-button-outline {
+      background: transparent;
+      color: #1A1A1A;
+      border: 1px solid #1A1A1A;
+    }
+    
+    .cta-button-outline:hover {
+      background: #1A1A1A;
+      color: #FAFAF8;
+    }
+    
+    .credentials {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .credential-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(26,26,26,0.04);
+      border-radius: 2px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      color: #666;
+    }
+    
+    .hero-pattern {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background: 
+        linear-gradient(90deg, rgba(250,250,248,1) 0%, rgba(250,250,248,0) 30%),
+        repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(0,0,0,0.02) 80px, rgba(0,0,0,0.02) 81px),
+        repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(0,0,0,0.02) 80px, rgba(0,0,0,0.02) 81px);
+      pointer-events: none;
+    }
+    
+    /* Trust Bar */
+    .trust-bar {
+      border-top: 1px solid #E8E8E6;
+      border-bottom: 1px solid #E8E8E6;
+      padding: 32px 48px;
+      background: #FFFFFF;
+    }
+    
+    .trust-bar-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    
+    .trust-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #888;
+    }
+    
+    .trust-logos {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    
+    .trust-logo {
+      font-size: 13px;
+      font-weight: 500;
+      color: #AAA;
+      letter-spacing: 0.02em;
+    }
+    
+    /* Section Styles */
+    .section {
+      padding: 120px 48px;
+    }
+    
+    .section-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .section-header {
+      margin-bottom: 64px;
+    }
+    
+    .section-number {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: #888;
+      margin-bottom: 16px;
+    }
+    
+    .section-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(32px, 5vw, 42px);
+      font-weight: 400;
+      color: #1A1A1A;
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+    
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: #1A1A1A;
+    }
+    
+    /* Model Section */
+    .model-section {
+      background: #F5F5F3;
+    }
+    
+    .about-intro {
+      max-width: 720px;
+      margin-bottom: 64px;
+    }
+    
+    .about-intro h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 32px;
+      font-weight: 400;
+      color: #1A1A1A;
+      margin-bottom: 24px;
+    }
+    
+    .about-lead {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 16px;
+    }
+    
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    
+    .focus-card {
+      background: #FFFFFF;
+      border: 1px solid #E8E8E6;
+      padding: 40px;
+      transition: all 0.3s ease;
+    }
+    
+    .focus-card:hover {
+      border-color: #1A1A1A;
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+    }
+    
+    .focus-icon {
+      margin-bottom: 24px;
+      opacity: 0.8;
+    }
+    
+    .focus-card h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: #1A1A1A;
+      margin-bottom: 16px;
+    }
+    
+    .focus-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #555;
+    }
+    
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    
+    .service-card {
+      background: #FFFFFF;
+      border: 1px solid #E8E8E6;
+      padding: 48px;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      cursor: pointer;
+    }
+    
+    .service-card:hover {
+      border-color: #1A1A1A;
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.06);
+    }
+    
+    .service-card:hover .service-arrow {
+      transform: translateX(6px);
+    }
+    
+    .service-icon {
+      margin-bottom: 24px;
+      opacity: 0.8;
+    }
+    
+    .service-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: #1A1A1A;
+      margin-bottom: 16px;
+    }
+    
+    .service-desc {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 24px;
+    }
+    
+    .service-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    
+    .service-feature {
+      font-size: 12px;
+      font-weight: 500;
+      color: #666;
+      padding: 6px 12px;
+      background: #F5F5F3;
+      letter-spacing: 0.02em;
+    }
+    
+    .service-footer {
+      padding-top: 24px;
+      border-top: 1px solid #E8E8E6;
+    }
+    
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: #1A1A1A;
+    }
+    
+    .service-arrow {
+      transition: transform 0.3s ease;
+    }
+    
+    /* Insights */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+    
+    .insight-card {
+      padding: 32px;
+      background: #FFFFFF;
+      border: 1px solid #E8E8E6;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .insight-card:hover {
+      border-color: #1A1A1A;
+    }
+    
+    .insight-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    
+    .insight-category {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #1A1A1A;
+      padding: 4px 8px;
+      background: #F0F0EE;
+    }
+    
+    .insight-date {
+      font-size: 12px;
+      color: #888;
+    }
+    
+    .insight-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: #1A1A1A;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+    
+    .insight-excerpt {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #666;
+    }
+    
+    .insights-cta {
+      text-align: center;
+    }
+    
+    .newsletter-link {
+      font-size: 14px;
+      font-weight: 500;
+      color: #1A1A1A;
+      text-decoration: none;
+      border-bottom: 1px solid #1A1A1A;
+      padding-bottom: 4px;
+    }
+    
+    /* Contact */
+    .contact {
+      background: #1A1A1A;
+      padding: 120px 48px;
+    }
+    
+    .contact-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 120px;
+    }
+    
+    .contact-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(36px, 5vw, 48px);
+      font-weight: 400;
+      color: #FAFAF8;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+    
+    .contact-desc {
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgba(250,250,248,0.7);
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+    
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      align-content: start;
+    }
+    
+    .contact-block-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.5);
+      margin-bottom: 16px;
+    }
+    
+    .contact-block-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #FAFAF8;
+    }
+    
+    /* Footer */
+    .footer {
+      border-top: 1px solid #E8E8E6;
+      padding: 48px;
+      background: #FAFAF8;
+    }
+    
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-copy {
+      font-size: 13px;
+      color: #888;
+    }
+    
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-link {
+      color: #888;
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s ease;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    
+    .footer-link:hover {
+      color: #1A1A1A;
+    }
+    
+    .footer-disclaimer {
+      max-width: 1400px;
+      margin: 32px auto 0;
+      padding-top: 32px;
+      border-top: 1px solid #E8E8E6;
+    }
+    
+    .footer-disclaimer p {
+      font-size: 11px;
+      line-height: 1.7;
+      color: #999;
+    }
+    
+    .legal-panel {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #FFFFFF;
+      border-top: 1px solid #E8E8E6;
+      box-shadow: 0 -8px 32px rgba(0,0,0,0.1);
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      max-height: 60vh;
+      overflow-y: auto;
+      z-index: 200;
+    }
+    
+    .legal-panel.open {
+      transform: translateY(0);
+    }
+    
+    .legal-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 48px;
+      border-bottom: 1px solid #E8E8E6;
+      position: sticky;
+      top: 0;
+      background: #FFFFFF;
+    }
+    
+    .legal-panel-header h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: #1A1A1A;
+    }
+    
+    .legal-panel-close {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #888;
+      padding: 8px;
+    }
+    
+    .legal-panel-close:hover {
+      color: #1A1A1A;
+    }
+    
+    .legal-panel-content {
+      padding: 32px 48px 48px;
+      max-width: 800px;
+    }
+    
+    .legal-panel-content p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 16px;
+    }
+    
+    .legal-panel-content strong {
+      color: #1A1A1A;
+    }
+    
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .focus-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .contact-inner {
+        grid-template-columns: 1fr;
+        gap: 64px;
+      }
+      
+      .contact-info {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 900px) {
+      .nav {
+        padding: 0 24px;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .mobile-menu {
+        padding: 24px;
+      }
+      
+      .hero {
+        padding: 100px 24px 60px;
+      }
+      
+      .hero-bg {
+        width: 100%;
+        opacity: 0.1;
+      }
+      
+      .hero-pattern {
+        display: none;
+      }
+      
+      .section {
+        padding: 80px 24px;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .focus-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .service-card {
+        padding: 32px;
+      }
+      
+      .insights-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .trust-bar {
+        padding: 24px;
+      }
+      
+      .trust-bar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .trust-logos {
+        gap: 24px;
+      }
+      
+      .contact {
+        padding: 80px 24px;
+      }
+      
+      .contact-info {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      
+      .footer {
+        padding: 32px 24px;
+      }
+      
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .footer-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      
+      .legal-panel-header {
+        padding: 24px;
+      }
+      
+      .legal-panel-content {
+        padding: 24px;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .hero-cta {
+        flex-direction: column;
+      }
+      
+      .cta-button {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .credentials {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="apercu-container">
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+      <div class="nav-inner">
+        <a href="#" class="logo">
+          <span class="logo-text">Aperçu</span>
+        </a>
+        <div class="nav-links">
+          <a href="#about" class="nav-link">About</a>
+          <a href="#approach" class="nav-link">Approach</a>
+          <a href="#insights" class="nav-link">Insights</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2">
+            <path d="M3 12h18M3 6h18M3 18h18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#approach" class="nav-link">Approach</a>
+        <a href="#insights" class="nav-link">Insights</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-inner">
+        <div class="fade-up">
+          <div class="eyebrow">
+            <div class="eyebrow-dot"></div>
+            Intelligence · Advisory · Capital
+          </div>
+        </div>
+        
+        <h1 class="hero-title fade-up delay-1">
+          Structured understanding<br>
+          of Africa's private<br>
+          technology markets
+        </h1>
+        
+        <p class="hero-subtitle fade-up delay-2">
+          We help investors see clearly and founders raise intelligently, with research 
+          that informs capital decisions and advisory that builds companies worth backing.
+        </p>
+        
+        <div class="hero-cta fade-up delay-3">
+          <a href="https://cal.com/abraham.apercu/15min?overlayCalendar=true" target="_blank" rel="noopener noreferrer" class="cta-button">
+            Schedule a Briefing
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <button class="cta-button cta-button-outline">
+            View Research
+          </button>
+        </div>
+        
+        <div class="credentials fade-up delay-4">
+          <div class="credential-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            London & Kigali
+          </div>
+          <div class="credential-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+            DFIs · Private Equity · Venture Capital
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-pattern"></div>
+    </section>
+
+    <!-- Trust Bar -->
+    <section class="trust-bar">
+      <div class="trust-bar-inner">
+        <span class="trust-label">Built for</span>
+        <div class="trust-logos">
+          <span class="trust-logo">Corporate Investment Arms</span>
+          <span class="trust-logo">Family Offices</span>
+          <span class="trust-logo">VC & PE</span>
+          <span class="trust-logo">Alternative Lenders</span>
+          <span class="trust-logo">Development Finance</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section model-section">
+      <div class="section-inner">
+        <div class="about-intro">
+          <span class="section-number">01</span>
+          <h3>A reliable pair of lenses</h3>
+          <p class="about-lead">
+            In everyday French, <em>aperçu</em> means "to perceive" or "to comprehend." 
+            For our clients, we're who you talk to when you need to cut through the fog 
+            on private tech and digital infrastructure businesses in emerging markets, to discover value.
+          </p>
+          <p class="about-lead">
+            We're a collective of researchers, operators, and advisors who've spent years 
+            learning how Africa's digital economies actually work. How markets move, how 
+            policy shapes opportunity, how founders build and how investors decide.
+          </p>
+        </div>
+        
+        <div class="focus-grid">
+          <div class="focus-card">
+            <div class="focus-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
+                <path d="M11 8v6M8 11h6"/>
+              </svg>
+            </div>
+            <h4>For Investors</h4>
+            <p>
+              We produce independent research on Africa's private technology markets, including 
+              company deep dives, sector landscapes, and valuation frameworks that help you 
+              allocate capital with confidence, not hope.
+            </p>
+          </div>
+          
+          <div class="focus-card">
+            <div class="focus-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h4>For Founders</h4>
+            <p>
+              We are a strategic advisory that combines investment legibility with hands-on 
+              deal support to help you build commercial value, position for the right investors, 
+              and navigate fundraising without losing focus on the business.
+            </p>
+          </div>
+          
+          <div class="focus-card">
+            <div class="focus-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h4>For Partners</h4>
+            <p>
+              We work with funds, corporates, and institutions seeking structured exposure 
+              to African technology. Co-research engagements, deal sourcing support, and 
+              strategic intelligence on markets that matter.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Approach -->
+    <section id="approach" class="section">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <h2 class="section-title">Our Approach</h2>
+          <div class="divider"></div>
+        </div>
+        
+        <div class="services-grid">
+          <!-- Research -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Research</h3>
+            <p class="service-desc">
+              We produce independent, sell-side coverage of Africa's private technology markets. 
+              Company deep dives, sector landscapes, and valuation frameworks—built from 
+              proprietary data and primary interviews—so investors can make decisions 
+              grounded in structured analysis, not pattern-matching.
+            </p>
+            <div class="service-features">
+              <span class="service-feature">Company Deep Dives</span>
+              <span class="service-feature">Sector Mapping</span>
+              <span class="service-feature">Valuation Frameworks</span>
+            </div>
+            <div class="service-footer">
+              <span class="service-link">
+                Learn more
+                <svg class="service-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Advisory -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Advisory</h3>
+            <p class="service-desc">
+              We partner with high-growth technology companies to build commercial value 
+              and investment legibility in parallel. Go-to-market design, partnership strategy, 
+              and deal support that positions you for the right capital at the right terms—while 
+              keeping you focused on actually running the business.
+            </p>
+            <div class="service-features">
+              <span class="service-feature">Go-to-Market Design</span>
+              <span class="service-feature">Partnership Strategy</span>
+              <span class="service-feature">Investor Readiness</span>
+            </div>
+            <div class="service-footer">
+              <span class="service-link">
+                Learn more
+                <svg class="service-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Labs -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5">
+                <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Labs</h3>
+            <p class="service-desc">
+              Some of the tools we need don't exist yet, so we're building them. Labs is 
+              where we develop proprietary data infrastructure and market platforms—starting 
+              with <em>trendsaf</em>, an open-core system for aggregating and transforming 
+              African market intelligence at scale.
+            </p>
+            <div class="service-features">
+              <span class="service-feature">Data Infrastructure</span>
+              <span class="service-feature">Market Platforms</span>
+              <span class="service-feature">Open-Core Tools</span>
+            </div>
+            <div class="service-footer">
+              <span class="service-link">
+                Learn more
+                <svg class="service-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Insights -->
+    <section id="insights" class="section" style="background: #F5F5F3;">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="section-number">03</span>
+          <h2 class="section-title">Latest Insights</h2>
+          <div class="divider"></div>
+        </div>
+        
+        <div class="insights-grid">
+          <article class="insight-card">
+            <div class="insight-meta">
+              <span class="insight-category">Research Note</span>
+              <span class="insight-date">Mar 2026</span>
+            </div>
+            <h3 class="insight-title">
+              WAEMU B2B Payments: Mapping the Competitive Landscape
+            </h3>
+            <p class="insight-excerpt">
+              Cross-border treasury, FX utility, and emerging stablecoin infrastructure 
+              across Francophone West Africa.
+            </p>
+          </article>
+          
+          <article class="insight-card">
+            <div class="insight-meta">
+              <span class="insight-category">Deep Dive</span>
+              <span class="insight-date">Feb 2026</span>
+            </div>
+            <h3 class="insight-title">
+              The Regulatory Big Bang: Policy Shifts Reshaping African Fintech
+            </h3>
+            <p class="insight-excerpt">
+              How regulatory evolution is creating generational opportunities for 
+              technology-enabled financial services.
+            </p>
+          </article>
+          
+          <article class="insight-card">
+            <div class="insight-meta">
+              <span class="insight-category">Market Sizing</span>
+              <span class="insight-date">Jan 2026</span>
+            </div>
+            <h3 class="insight-title">
+              Digital Lending in East Africa: Addressable Market Analysis
+            </h3>
+            <p class="insight-excerpt">
+              Bottom-up market sizing and competitive positioning across Kenya, 
+              Uganda, Tanzania, and Rwanda.
+            </p>
+          </article>
+        </div>
+        
+        <div class="insights-cta">
+          <a href="https://moneymythsafrica.substack.com/" class="newsletter-link" target="_blank" rel="noopener noreferrer">
+            Subscribe to our newsletter →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+      <div class="contact-inner">
+        <div class="contact-content">
+          <h2 class="contact-title">
+            Let's discuss how we can<br>
+            support your Africa strategy
+          </h2>
+          <p class="contact-desc">
+            Whether you're evaluating an investment, entering a new market, or 
+            seeking proprietary research—we're ready to help.
+          </p>
+          <a href="https://cal.com/abraham.apercu/15min?overlayCalendar=true" target="_blank" rel="noopener noreferrer" class="cta-button" style="background: #FAFAF8; color: #1A1A1A;">
+            Schedule a Conversation
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+        
+        <div class="contact-info">
+          <div class="contact-block">
+            <h4 class="contact-block-title">London</h4>
+            <p class="contact-block-text">
+              128 City Road<br>
+              London, England<br>
+              EC1V 2NX
+            </p>
+          </div>
+          <div class="contact-block">
+            <h4 class="contact-block-title">Kigali</h4>
+            <p class="contact-block-text">
+              1 KN 78 Street<br>
+              Kigali<br>
+              Rwanda
+            </p>
+          </div>
+          <div class="contact-block">
+            <h4 class="contact-block-title">Email</h4>
+            <p class="contact-block-text">
+              hello@apercu.pro
+            </p>
+          </div>
+          <div class="contact-block">
+            <h4 class="contact-block-title">Phone</h4>
+            <p class="contact-block-text">
+              +44 7723 617979
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <a href="#" class="logo">
+            <span class="logo-text">Aperçu</span>
+          </a>
+          <p class="footer-copy">© 2025 Aperçu Holdings Ltd. All rights reserved.</p>
+        </div>
+        
+        <div class="footer-links">
+          <button class="footer-link" onclick="document.getElementById('privacy-panel').classList.toggle('open')">
+            Privacy Policy
+          </button>
+          <button class="footer-link" onclick="document.getElementById('tos-panel').classList.toggle('open')">
+            Terms of Service
+          </button>
+          <a href="https://moneymythsafrica.substack.com/" class="footer-link" target="_blank" rel="noopener noreferrer">Newsletter</a>
+          <a href="https://www.linkedin.com/company/aper%C3%A7u-group" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </div>
+      
+      <!-- Disclaimer -->
+      <div class="footer-disclaimer">
+        <p>
+          Aperçu Holdings Ltd is a research and advisory firm. We are not a registered broker-dealer, 
+          investment adviser, or placement agent. We do not provide regulated financial services, 
+          solicit investments, or act as an intermediary in securities transactions. Any research, 
+          analysis, or strategic guidance we provide is for informational purposes only and does not 
+          constitute investment advice, an offer to sell, or a solicitation of an offer to buy any 
+          securities. Clients should consult with appropriately licensed professionals before making 
+          investment decisions.
+        </p>
+      </div>
+      
+      <!-- Privacy Panel -->
+      <div id="privacy-panel" class="legal-panel">
+        <div class="legal-panel-header">
+          <h4>Privacy Policy</h4>
+          <button onclick="document.getElementById('privacy-panel').classList.remove('open')" class="legal-panel-close">
+            ✕
+          </button>
+        </div>
+        <div class="legal-panel-content">
+          <p><strong>Last updated:</strong> January 2025</p>
+          <p>
+            Aperçu Holdings Ltd ("Aperçu," "we," "us," or "our") respects your privacy. This policy 
+            explains how we collect, use, and protect information when you use our website and services.
+          </p>
+          <p><strong>Information We Collect:</strong> We may collect information you provide directly 
+          (such as name, email, and company details when you contact us), as well as usage data 
+          (such as pages visited and time spent on site) through cookies and similar technologies.</p>
+          <p><strong>How We Use Information:</strong> We use collected information to provide and 
+          improve our services, respond to inquiries, send relevant communications, and comply with 
+          legal obligations.</p>
+          <p><strong>Data Sharing:</strong> We do not sell your personal information. We may share 
+          data with service providers who assist our operations, or when required by law.</p>
+          <p><strong>Your Rights:</strong> You may request access to, correction of, or deletion of 
+          your personal data by contacting us at hello@apercu.pro.</p>
+          <p><strong>Contact:</strong> For privacy-related inquiries, email hello@apercu.pro.</p>
+        </div>
+      </div>
+      
+      <!-- Terms Panel -->
+      <div id="tos-panel" class="legal-panel">
+        <div class="legal-panel-header">
+          <h4>Terms of Service</h4>
+          <button onclick="document.getElementById('tos-panel').classList.remove('open')" class="legal-panel-close">
+            ✕
+          </button>
+        </div>
+        <div class="legal-panel-content">
+          <p><strong>Last updated:</strong> January 2025</p>
+          <p>
+            By accessing or using the Aperçu Holdings Ltd website and services, you agree to these terms.
+          </p>
+          <p><strong>Services:</strong> Aperçu provides research, advisory, and strategic consulting 
+          services. We are not a registered broker-dealer, investment adviser, or placement agent. 
+          Nothing on this website constitutes investment advice or an offer to buy or sell securities.</p>
+          <p><strong>Intellectual Property:</strong> All content on this website, including research, 
+          analysis, and reports, is the property of Aperçu Holdings Ltd. You may not reproduce, 
+          distribute, or create derivative works without our written permission.</p>
+          <p><strong>Limitation of Liability:</strong> Our services are provided "as is." We make no 
+          warranties regarding the accuracy or completeness of any information. Aperçu shall not be 
+          liable for any damages arising from use of our services or reliance on our content.</p>
+          <p><strong>Governing Law:</strong> These terms are governed by the laws of England and Wales.</p>
+          <p><strong>Contact:</strong> For questions about these terms, email hello@apercu.pro.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Navigation scroll effect
+    window.addEventListener('scroll', function() {
+      const nav = document.getElementById('nav');
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let menuOpen = false;
+
+    mobileMenuBtn.addEventListener('click', function() {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('open');
+      
+      // Update icon
+      if (menuOpen) {
+        mobileMenuBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+      } else {
+        mobileMenuBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>';
+      }
+    });
+
+    // Close mobile menu when clicking a link
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        menuOpen = false;
+        mobileMenuBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>';
+      });
+    });
+  </script>
+</body>
+</html>
