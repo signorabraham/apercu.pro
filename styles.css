@@ -1296,3 +1296,156 @@ footer {
     inset 1px 0 0 rgba(255, 255, 255, 0.35),
     0 32px 76px rgba(0, 0, 0, 0.38);
 }
+
+/* Mobile composition repair — keep the desktop art direction intact */
+@media (max-width: 760px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .hero {
+    min-height: 880px;
+    overflow: hidden;
+  }
+
+  .hero-copy {
+    width: 100%;
+    max-width: none;
+    padding: 4.5rem 1.25rem 5rem;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    margin: 2.6rem 0 2rem;
+    font-size: clamp(3rem, 12.25vw, 3.65rem);
+    line-height: 0.96;
+    letter-spacing: -0.052em;
+  }
+
+  .hero .lead {
+    max-width: 32rem;
+    color: #292925;
+    font-size: 1.02rem;
+    line-height: 1.55;
+  }
+
+  .actions {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .hero-field > img {
+    object-position: 58% 100%;
+  }
+
+  .hero-field .fade {
+    background:
+      radial-gradient(
+        ellipse 118% 72% at 14% 43%,
+        rgba(243, 241, 235, 0.98) 0%,
+        rgba(243, 241, 235, 0.92) 42%,
+        rgba(243, 241, 235, 0.48) 69%,
+        rgba(243, 241, 235, 0) 88%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(243, 241, 235, 0.98) 0%,
+        rgba(243, 241, 235, 0.9) 50%,
+        rgba(243, 241, 235, 0.32) 76%,
+        rgba(243, 241, 235, 0.88) 100%
+      );
+  }
+
+  .hero-field .lens {
+    border-color: rgba(255, 255, 255, 0.58);
+  }
+
+  .thinking {
+    display: block;
+    min-height: auto;
+    padding: 5rem 1.25rem 6rem;
+    overflow: hidden;
+  }
+
+  .thinking-head {
+    width: 100%;
+    margin-bottom: 3rem;
+  }
+
+  .thinking-head h2 {
+    max-width: 100%;
+    margin-bottom: 0;
+    font-size: clamp(3.1rem, 13vw, 4rem);
+    line-height: 0.92;
+  }
+
+  .note-stack {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 0;
+    gap: 0;
+    padding: 0;
+  }
+
+  .thinking .note,
+  .thinking .note:nth-child(1),
+  .thinking .note:nth-child(2),
+  .thinking .note:nth-child(3) {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    min-height: 250px;
+    margin: 0;
+    padding: 1.4rem;
+    border-radius: 24px;
+    transform: none;
+  }
+
+  .thinking .note:nth-child(2),
+  .thinking .note:nth-child(3) {
+    margin-top: -32px;
+  }
+
+  .thinking .note:nth-child(1) {
+    z-index: 1;
+  }
+
+  .thinking .note:nth-child(2) {
+    z-index: 2;
+  }
+
+  .thinking .note:nth-child(3) {
+    z-index: 3;
+  }
+
+  .thinking .note h3 {
+    max-width: 100%;
+    margin: 1.35rem 0 0.65rem;
+    font-size: 1.45rem;
+    line-height: 1.08;
+  }
+
+  .thinking .note p {
+    max-width: 100%;
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .thinking .note:hover,
+  .thinking .note:focus-visible {
+    transform: translateY(-8px);
+  }
+
+  .all-notes {
+    position: static;
+    display: flex;
+    width: 100%;
+    margin: 1.5rem 0 0;
+  }
+}
